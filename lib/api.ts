@@ -13,7 +13,7 @@ interface FetchNotesProps {
   search?: string;
 }
 
-interface FetchNotesResponse {
+export interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
 }
@@ -43,9 +43,13 @@ export async function fetchNotes({ page, perPage, search} : FetchNotesProps): Pr
 };
 
 export const fetchNoteById = async (id: string) => {
-  const res = await axios.get<Note>(`/notes/${id}`);
-  return res.data;
-};
+  const response = await axios.get<Note>(`${BASE_URL}/notes/${id}`, {
+    headers: {
+      Authorization: `Bearer ${NEXT_PUBLIC_NOTEHUB_TOKEN}`,
+    },
+  });
+  return response.data;
+}
 
 export async function createNote({ title, content, tag }: CreateNoteProps): Promise<Note> {
   const response = await axios.post<Note>(
