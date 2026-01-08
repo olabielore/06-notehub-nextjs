@@ -24,7 +24,11 @@ export default function NotesPage() {
 
     const [debouncedSearch] = useDebounce(search, 1000);
     const perPage = 12;
-
+      
+      const closeModal = (): void => {
+        setIsModalOpen(false);
+      };
+    
     const { data, isLoading, isError } = useQuery<FetchNotesResponse, Error>({
         queryKey: ["notes", page, debouncedSearch],
         queryFn: () => fetchNotes({ page, perPage, search: debouncedSearch, }),
@@ -63,7 +67,7 @@ export default function NotesPage() {
             )}
                 <Modal
                     isOpen={isModalOpen}
-                    onClose={() => setIsModalOpen(false)}>
+                    onClose={closeModal}>
                     <NoteForm setIsModalOpen={setIsModalOpen} />
                 </Modal>
         </div>
