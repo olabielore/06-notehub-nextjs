@@ -37,7 +37,7 @@ export default function NoteList({ notes }: NoteListProps) {
             <div className={css.footer}>
               <span className={css.tag}>{note.tag}</span>
               <Link href={`/notes/${note.id}`}>View details</Link>
-                    <button className={css.button} onClick={() => handleDelete(note.id)} disabled={deleteNoteMutation.isLoading} >Delete</button>
+                    <button className={css.button} onClick={() => handleDelete(note.id)} disabled={deleteNoteMutation.isPending} >Delete</button>
             </div>
             </li>
             ))}
