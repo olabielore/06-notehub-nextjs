@@ -65,11 +65,11 @@ export default function NotesPage() {
             {!isLoading && notes.length > 0 && (
                 <NoteList notes={notes}/>
             )}
-                <Modal
-                    isOpen={isModalOpen}
-                    onClose={closeModal}>
+            {isModalOpen && (
+                <Modal isOpen={true} onClose={closeModal}>
                     <NoteForm setIsModalOpen={setIsModalOpen} />
                 </Modal>
+            )}
         </div>
     );
 }
