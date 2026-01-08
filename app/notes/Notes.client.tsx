@@ -28,6 +28,7 @@ export default function NotesPage() {
     const { data, isLoading, isError } = useQuery<FetchNotesResponse, Error>({
         queryKey: ["notes", page, debouncedSearch],
         queryFn: () => fetchNotes({ page, perPage, search: debouncedSearch, }),
+        placeholderData: keepPreviousData,
     });
 
     const totalPages = data?.totalPages ?? 0;
